@@ -24,6 +24,7 @@ namespace ConsoleUI
             foreach (var category in categoryManager.GetAll())
             {
                 Console.WriteLine(category.CategoryName);
+
             }
         }
 
