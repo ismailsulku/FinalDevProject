@@ -34,8 +34,8 @@ namespace WebAPI
             //AOP
             //Postsharp
             services.AddControllers();
-            services.AddSingleton<IProductService,ProductManager>(); //Biri senden IProduct Service isterse ona ProductManager ver..
-            services.AddSingleton<IProductDal, EfProductDal>(); //ProductManager IProductDal a da ref halinde olduðu için biri senden IProductDal isterse ona EfProductDal ver..
+            //services.AddSingleton<IProductService,ProductManager>(); //Biri senden IProduct Service isterse ona ProductManager ver..
+            //services.AddSingleton<IProductDal, EfProductDal>(); //ProductManager IProductDal a da ref halinde olduðu için biri senden IProductDal isterse ona EfProductDal ver..
                                                                 //Arka planda new lenir ve constructora gönderir.
         }
 
