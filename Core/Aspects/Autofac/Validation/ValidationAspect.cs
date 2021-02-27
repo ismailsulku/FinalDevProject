@@ -13,7 +13,8 @@ namespace Core.Aspects.Autofac.Validation
     {
         private Type _validatorType;
         public ValidationAspect(Type validatorType)
-        {
+        { 
+            //defensive coding
             if (!typeof(IValidator).IsAssignableFrom(validatorType))
             {
                 throw new System.Exception("Bu bir doğrulama sınıfı değildir!");
@@ -24,11 +25,11 @@ namespace Core.Aspects.Autofac.Validation
         protected override void OnBefore(IInvocation invocation)
         {
             var validator = (IValidator)Activator.CreateInstance(_validatorType); //reflection çalışma anında bir şeyleri çalıştırabilmemiz sağlıyor..
-            var entityType = _validatorType.BaseType.GetGenericArguments()[0]; //ProductValidator git bastype ını bul, onun generic argümanlarından ilkini bul
-            var entities = invocation.Arguments.Where(t => t.GetType() == entityType); // onun parametrelerini bul..
+            var entityType = _validatorType.BaseType.GetGenericArguments()[0]; //ProductValidator git basetype ını bul, onun generic argümanlarından ilkini bul
+            var entities = invocation.Arguments.Where(t => t.GetType() == entityType); // onun parametrelerini bul.. methodun argümanlarını gez (add in productı) eğer o entity tipinde ise
             foreach (var entity in entities)
             {
-                ValidationTool.Validate(validator, entity);
+                ValidationTool.Validate(validator, entity); // validate et (doğrulama)
             }
         }
     }
