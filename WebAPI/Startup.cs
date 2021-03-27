@@ -46,7 +46,7 @@ namespace WebAPI
             //services.AddSingleton<IProductDal, EfProductDal>(); //ProductManager IProductDal a da ref halinde olduðu için biri senden IProductDal isterse ona EfProductDal ver..
             //Arka planda new lenir ve constructora gönderir.
 
-            
+            services.AddCors();
 
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
@@ -76,6 +76,10 @@ namespace WebAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.ConfigureCustomExceptionMiddleware();
+
+            app.UseCors(builder=>builder.WithOrigins("http://localhost:4200").AllowAnyHeader());
+            //þu adresten ne gelirse gelsin izin ver.. bu web sayfasýna güveniyorum..
             app.UseHttpsRedirection();
 
             app.UseRouting();
